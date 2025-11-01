@@ -41,22 +41,27 @@ function Hint({ title, lines }: { title: string; lines: string[] }) {
   );
 }
 
+// Заменяем только иллюстрацию, остальной файл без изменений.
+
 function LoadingIllustrationSSR() {
   const srcLight = '/app-images/app-config-images/loading-light.svg';
   const srcDark = '/app-images/app-config-images/loading-dark.svg';
   return (
     <div className="relative h-full w-full">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
       <picture>
         <source media="(prefers-color-scheme: dark)" srcSet={srcDark} />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={srcLight} alt="Loading" className="h-full w-full object-contain" />
       </picture>
-      {/* CSS prefers-color-scheme handles inversion; no client mutation */}
       <noscript>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={srcLight} alt="Loading" className="h-full w-full object-contain" />
       </noscript>
     </div>
   );
 }
+
 
 export default async function Home() {
   return (
