@@ -1,11 +1,10 @@
-// aifa-v2/next.config.mjs
-import withPWAInit from 'next-pwa';
+// next.config.mjs - БЕЗ многоязычности
+import withPWAInit from 'next-pwa'
 
-const isDev = process.env.NODE_ENV === 'development';
-const isVercel = process.env.VERCEL === '1';
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://aifa.dev';
+const isDev = process.env.NODE_ENV === 'development'
+const isVercel = process.env.VERCEL === '1'
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://aifa.dev'
 
-// PWA Configuration with optimized Workbox settings
 const withPWA = withPWAInit({
   dest: 'public',
   register: true,
@@ -29,11 +28,10 @@ const withPWA = withPWAInit({
     disableDevLogs: !isDev,
     clientsClaim: true,
     skipWaiting: true,
-    maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 5MB limit
+    maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
     cleanupOutdatedCaches: true,
   },
   runtimeCaching: [
-    // Google Fonts - cache forever (immutable)
     {
       urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
       handler: 'CacheFirst',
@@ -41,24 +39,13 @@ const withPWA = withPWAInit({
         cacheName: 'google-fonts-stylesheets',
         expiration: {
           maxEntries: 32,
-          maxAgeSeconds: 365 * 24 * 60 * 60, // 1 year
+          maxAgeSeconds: 365 * 24 * 60 * 60,
         },
         cacheableResponse: {
           statuses: [0, 200],
         },
-        plugins: [
-          {
-            handlerDidError: async () => {
-              return new Response('Offline - Font unavailable', {
-                status: 503,
-              });
-            },
-          },
-        ],
       },
     },
-
-    // Google Font files - cache forever
     {
       urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*/i,
       handler: 'CacheFirst',
@@ -66,15 +53,13 @@ const withPWA = withPWAInit({
         cacheName: 'google-fonts-webfonts',
         expiration: {
           maxEntries: 30,
-          maxAgeSeconds: 365 * 24 * 60 * 60, // 1 year
+          maxAgeSeconds: 365 * 24 * 60 * 60,
         },
         cacheableResponse: {
           statuses: [0, 200],
         },
       },
     },
-
-    // Static images - cache for 30 days
     {
       urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp|avif|ico)$/i,
       handler: 'CacheFirst',
@@ -82,15 +67,13 @@ const withPWA = withPWAInit({
         cacheName: 'static-images-cache',
         expiration: {
           maxEntries: 64,
-          maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
+          maxAgeSeconds: 30 * 24 * 60 * 60,
         },
         cacheableResponse: {
           statuses: [0, 200],
         },
       },
     },
-
-    // Next.js static assets - cache for 24 hours
     {
       urlPattern: /\/_next\/static\/.*/i,
       handler: 'CacheFirst',
@@ -98,15 +81,13 @@ const withPWA = withPWAInit({
         cacheName: 'next-static',
         expiration: {
           maxEntries: 64,
-          maxAgeSeconds: 24 * 60 * 60, // 24 hours
+          maxAgeSeconds: 24 * 60 * 60,
         },
         cacheableResponse: {
           statuses: [0, 200],
         },
       },
     },
-
-    // API routes - network first with fallback
     {
       urlPattern: /\/api\/.*/i,
       handler: 'NetworkFirst',
@@ -115,15 +96,13 @@ const withPWA = withPWAInit({
         networkTimeoutSeconds: 10,
         expiration: {
           maxEntries: 50,
-          maxAgeSeconds: 24 * 60 * 60, // 24 hours
+          maxAgeSeconds: 24 * 60 * 60,
         },
         cacheableResponse: {
           statuses: [0, 200, 201, 202, 204],
         },
       },
     },
-
-    // Vercel Blob storage - cache for 7 days
     {
       urlPattern: /^https:\/\/.*\.vercel-storage\.com\/.*/i,
       handler: 'CacheFirst',
@@ -131,15 +110,13 @@ const withPWA = withPWAInit({
         cacheName: 'vercel-blob-cache',
         expiration: {
           maxEntries: 32,
-          maxAgeSeconds: 7 * 24 * 60 * 60, // 7 days
+          maxAgeSeconds: 7 * 24 * 60 * 60,
         },
         cacheableResponse: {
           statuses: [0, 200],
         },
       },
     },
-
-    // GitHub raw content - cache for 24 hours
     {
       urlPattern: /^https:\/\/raw\.githubusercontent\.com\/.*/i,
       handler: 'CacheFirst',
@@ -147,7 +124,7 @@ const withPWA = withPWAInit({
         cacheName: 'github-raw-cache',
         expiration: {
           maxEntries: 16,
-          maxAgeSeconds: 24 * 60 * 60, // 24 hours
+          maxAgeSeconds: 24 * 60 * 60,
         },
         cacheableResponse: {
           statuses: [0, 200],
@@ -155,17 +132,8 @@ const withPWA = withPWAInit({
       },
     },
   ],
-});
+})
 
-/**
- * Enhanced Content Security Policy
- * Provides strict security while supporting:
- * - Next.js with WebAssembly
- * - Stripe payment processing
- * - Google Analytics
- * - External fonts
- * - AI chat functionality
- */
 const cspHeader = [
   "default-src 'self'",
   "script-src 'self' 'wasm-unsafe-eval' www.google-analytics.com www.googletagmanager.com cdn.jsdelivr.net",
@@ -181,7 +149,7 @@ const cspHeader = [
   "form-action 'self'",
   "frame-ancestors 'self'",
   "upgrade-insecure-requests",
-].join('; ');
+].join('; ')
 
 const securityHeaders = [
   {
@@ -216,7 +184,7 @@ const securityHeaders = [
     key: 'Expect-CT',
     value: 'max-age=86400, enforce',
   },
-];
+]
 
 const cacheHeaders = [
   {
@@ -316,10 +284,9 @@ const cacheHeaders = [
       },
     ],
   },
-];
+]
 
 export default withPWA({
-  // Core optimization settings
   reactStrictMode: true,
   swcMinify: true,
   compress: true,
@@ -327,7 +294,6 @@ export default withPWA({
   productionBrowserSourceMaps: false,
   pageExtensions: ['tsx', 'ts', 'jsx', 'js'],
 
-  // Image optimization
   images: {
     remotePatterns: [
       {
@@ -355,27 +321,17 @@ export default withPWA({
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 31536000, // 1 year
+    minimumCacheTTL: 31536000,
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'self'; sandbox;",
   },
 
-  // Headers with security and caching
   headers: async () => [
     {
       source: '/:path*',
       headers: securityHeaders,
     },
     ...cacheHeaders,
-    {
-      source: '/sitemap.xml',
-      headers: [
-        {
-          key: 'Content-Type',
-          value: 'application/xml; charset=utf-8',
-        },
-      ],
-    },
     {
       source: '/feed.xml',
       headers: [
@@ -387,25 +343,17 @@ export default withPWA({
     },
   ],
 
-  // Redirects
+  // ✅ ПРАВИЛЬНЫЕ редиректы БЕЗ конфликтов
   redirects: async () => [
     {
       source: '/manifest.json',
       destination: '/manifest.webmanifest',
       permanent: true,
     },
-    // Add multilingual redirects if needed
-    {
-      source: '/en/:path*',
-      destination: '/:path*',
-      permanent: false,
-    },
   ],
 
-  // Rewrites for API and internationalization
   rewrites: async () => ({
     beforeFiles: [
-      // API rewrites
       {
         source: '/api/:path*',
         destination: '/api/:path*',
@@ -413,16 +361,14 @@ export default withPWA({
     ],
   }),
 
-  // Webpack optimization
   webpack: (config, { isServer }) => {
     if (!isServer) {
-      config.optimization.runtimeChunk = 'single';
+      config.optimization.runtimeChunk = 'single'
       config.optimization.splitChunks = {
         chunks: 'all',
         cacheGroups: {
           default: false,
           vendors: false,
-          // Vendor chunk
           vendor: {
             filename: 'chunks/vendor-[hash].js',
             test: /node_modules/,
@@ -430,7 +376,6 @@ export default withPWA({
             reuseExistingChunk: true,
             enforce: true,
           },
-          // Common chunk for shared dependencies
           common: {
             filename: 'chunks/common-[hash].js',
             minChunks: 2,
@@ -439,18 +384,16 @@ export default withPWA({
             enforce: true,
           },
         },
-      };
+      }
     }
-    return config;
+    return config
   },
 
-  // Environment variables
   env: {
     NEXT_PUBLIC_SITE_URL: siteUrl,
     NEXT_PUBLIC_ENVIRONMENT: process.env.NEXT_PUBLIC_ENVIRONMENT || 'development',
   },
 
-  // Experimental features for better performance
   experimental: {
     optimizePackageImports: [
       'lucide-react',
@@ -468,44 +411,33 @@ export default withPWA({
     },
   },
 
-  // TypeScript strict mode
   typescript: {
     strict: true,
     tsconfigPath: './tsconfig.json',
   },
 
-  // ESLint configuration
   eslint: {
     dirs: ['app', 'lib', 'components', 'utils', 'config'],
     ignoreDuringBuilds: false,
   },
 
-  // On-demand entries for better development experience
   onDemandEntries: {
     maxInactiveAge: 60 * 1000,
     pagesBufferLength: 5,
   },
 
-  // Internationalization support
-  i18n: {
-    locales: ['en', 'ru', 'es'], // Add your supported locales
-    defaultLocale: 'en',
-    localeDetection: true,
-  },
+  // ❌ УДАЛЕНО:
+  // i18n конфигурация
+  // Редиректы на /en/
 
-  // Trailing slashes configuration
   trailingSlash: false,
-
-  // ETag generation
   generateEtags: true,
 
-  // Vercel-specific configuration
   ...(isVercel && {
     swcMinify: true,
     productionBrowserSourceMaps: false,
   }),
 
-  // Build optimization
   staticPageGenerationTimeout: 120,
   outputFileTracing: true,
-});
+})
