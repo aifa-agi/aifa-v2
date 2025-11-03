@@ -623,7 +623,7 @@ export default async function Home() {
 
           {/* Hero Image (unchanged) */}
           <div className="relative">
-            <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl border border-border bg-muted">
+            <div className="aspect-[4/3] w-full overflow-hidden ">
               <LoadingIllustrationSSR />
             </div>
           </div>
