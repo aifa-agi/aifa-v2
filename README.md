@@ -526,6 +526,72 @@ Env-driven configuration via appConfig allows changing branding, URL, social pro
 
 This architecture ensures that each new page automatically gets a complete set of SEO optimizations, PWA compatibility, accessibility, and performance without additional developer effort.
 
+```
+# Site Configuration
+NEXT_PUBLIC_SITE_URL=https://aifa.dev
+NEXT_PUBLIC_APP_NAME=AIFA
+NEXT_PUBLIC_APP_SHORT_NAME=AIFA
+NEXT_PUBLIC_APP_DESCRIPTION=Free open-source starter kit to build, deploy, and scale intelligent AI applications. Features secure multi-provider auth, Stripe payments, vector knowledge bases, deep-research agents, and unique fractal architecture designed for the future of AI.
+NEXT_PUBLIC_MAIL_SUPPORT=support@aifa.dev
+NEXT_PUBLIC_CHAT_BRAND=ChatGPT
 
+# Localization
+NEXT_PUBLIC_DEFAULT_LOCALE=en
+
+# Social Media Links
+NEXT_PUBLIC_TWITTER_HANDLE=@aifa_agi
+NEXT_PUBLIC_GITHUB_URL=https://github.com/aifa-agi/aifa
+NEXT_PUBLIC_LINKEDIN_URL=https://linkedin.com/company/aifa
+NEXT_PUBLIC_FACEBOOK_URL=
+
+# PWA Configuration
+NEXT_PUBLIC_PWA_THEME_COLOR=#ffffff
+NEXT_PUBLIC_PWA_BACKGROUND_COLOR=#ffffff
+NEXT_PUBLIC_PWA_SCREENSHOT_MOBILE=
+NEXT_PUBLIC_PWA_SCREENSHOT_DESKTOP=
+
+NEXT_PUBLICTHEME_COLORS_LIGHT=#ffffff
+NEXT_PUBLIC_THEME_COLORS_DARK=#09090b
+
+# SEO Configuration
+NEXT_PUBLIC_SEO_INDEXING=allow
+NEXT_PUBLIC_ROBOTS_INDEX=true
+NEXT_PUBLIC_ROBOTS_FOLLOW=true
+
+# OpenGraph Configuration
+NEXT_PUBLIC_OG_LOCALE=en_US
+NEXT_PUBLIC_OG_IMAGE_WIDTH=1200
+NEXT_PUBLIC_OG_IMAGE_HEIGHT=630
+NEXT_PUBLIC_OG_TYPE=website
+
+# Content Type Defaults (for different sections)
+NEXT_PUBLIC_BLOG_CONTENT_TYPE=blog
+NEXT_PUBLIC_PRODUCT_CONTENT_TYPE=product
+NEXT_PUBLIC_DOC_CONTENT_TYPE=documentation
+
+# Author Configuration
+NEXT_PUBLIC_DEFAULT_AUTHOR_NAME=AIFA Team
+NEXT_PUBLIC_DEFAULT_AUTHOR_EMAIL=author@aifa.dev
+NEXT_PUBLIC_DEFAULT_AUTHOR_TWITTER=aifa_agi
+NEXT_PUBLIC_DEFAULT_AUTHOR_LINKEDIN=aifa
+NEXT_PUBLIC_DEFAULT_AUTHOR_FACEBOOK=
+NEXT_PUBLIC_DEFAULT_AUTHOR_BIO=Building the future of AI applications
+NEXT_PUBLIC_DEFAULT_AUTHOR_IMAGE=/app-config-images/author-avatar.jpg
+NEXT_PUBLIC_DEFAULT_AUTHOR_URL=https://aifa.dev
+NEXT_PUBLIC_DEFAULT_AUTHOR_JOB_TITLE=AI Developer
+
+# Search Engine Verification
+NEXT_PUBLIC_GOOGLE_VERIFICATION=
+NEXT_PUBLIC_YANDEX_VERIFICATION=
+
+NEXT_PUBLIC_GOOGLE_ANALYTICS_ID=
+
+# Mobile App Configuration
+NEXT_PUBLIC_IOS_APP_ID=
+NEXT_PUBLIC_ANDROID_PACKAGE=
+
+# Environment
+NEXT_PUBLIC_ENVIRONMENT=production
+```
 
 
