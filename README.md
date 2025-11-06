@@ -2,6 +2,8 @@
 
 The presented Next.js starter represents an engineering solution where each component operates in synergy to achieve maximum search visibility and seamless user experience as a progressive web application.
 
+Check also: [https://aifa.dev](https://aifa.dev)
+
 ## App Config - Central Nervous System of the Application
 
 App Config functions as a single source of truth for all critical application parameters. This TypeScript module imports values from environment variables and creates a strictly typed configuration object accessible throughout the application.
@@ -212,7 +214,7 @@ strategy="beforeInteractive"
 ```
 
 
-The `pathname: "/about"` parameter generates the correct canonical URL [https://aifa.dev/about](https://aifa.dev/about). The Organization schema is created via the ready-made `generateOrganizationSchema()` generator from lib/seo-generators.ts. The title automatically receives the template from appConfig.pageDefaults.titleTemplate, forming "About AIFA - AIFA".
+The `pathname: "/about"` parameter generates the correct canonical URL [https://aifa.dev/about](https://aifa.dev). The Organization schema is created via the ready-made `generateOrganizationSchema()` generator from lib/seo-generators.ts. The title automatically receives the template from appConfig.pageDefaults.titleTemplate, forming "About AIFA - AIFA".
 
 ### Content Page Pattern
 
